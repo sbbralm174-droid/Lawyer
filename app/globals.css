@@ -1,42 +1,71 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   html {
-    color-scheme: dark;
+    scroll-behavior: smooth;
   }
+  
+  body {
+    @apply antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-neutral-dark dark:text-gray-100;
+  }
+  
+  h1 {
+    @apply text-h1 md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-h2 md:text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-h3 md:text-2xl;
+  }
+  
+  p {
+    @apply text-base leading-relaxed dark:text-gray-300;
+  }
+  
+  /* Dark mode background and text colors */
+  .dark body {
+    @apply bg-gray-900 text-gray-300;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary dark:bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold 
+           hover:bg-primary-600 dark:hover:bg-primary-700 hover:shadow-lg hover:-translate-y-0.5 
+           transition-all duration-300 focus:outline-none focus:ring-2 
+           focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-primary dark:border-primary-300 text-primary dark:text-primary-300 px-8 py-4 rounded-lg 
+           font-semibold hover:bg-primary dark:hover:bg-primary-600 hover:text-white 
+           transition-all duration-300 focus:outline-none focus:ring-2 
+           focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-lg 
+           transition-shadow duration-300 p-8;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 
+           bg-white dark:bg-gray-800 text-neutral-dark dark:text-gray-300
+           focus:border-primary focus:ring-2 focus:ring-primary/20 
+           focus:outline-none transition-colors duration-200;
+  }
+}
+
+/* Smooth transition for theme changes */
+* {
+  @apply transition-colors duration-200;
 }
